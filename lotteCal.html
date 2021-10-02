@@ -1,0 +1,129 @@
+<html>
+<head>
+<script>
+const dataAll = [];
+for(i = 1 ; i < 46; i++){
+	dataAll.push(i);
+}
+
+var test =
+[ 6,9,37,39,41,44,
+8,12,21,26,37,38,
+1,14,15,33,39,40,
+3,16,24,29,33,40,
+1,4,6,9,15,27 ];
+
+
+function clearView(){
+	document.getElementById("numbers").value = '';
+	document.getElementById("results").value = '';
+}
+
+function calLotteOut(){
+
+	var num = document.getElementById("numbers");
+	if(num.value === ''){
+		num.value = test;
+	}
+		
+	const dataArr = num.value.replaceAll('\n', '').split(',');
+	
+	const fil = [];
+	dataArr.forEach((element) => {
+		if(!fil.includes(element)) {
+			fil.push(element);
+		}
+	});
+
+	fil.sort(function(a, b)  {
+	  return a - b;
+	});
+
+	const last = dataAll.filter(x => !fil.includes(x));
+
+	console.log(fil);
+	console.log(dataAll);
+
+	console.log(last);
+
+	const hi = [];
+	const vv = [];
+	for(; vv.length < 5;){
+		var t1 = last[Math.floor(Math.random() * last.length)];
+		hi.push(t1);
+		hi.forEach((element) => {	
+			if(!vv.includes(element)) {		
+				vv.push(element);
+			}
+	});
+	}
+
+	vv.sort(function(a, b)  {
+	  return a - b;
+	});
+	console.log(vv);
+	
+	var beforeVal = document.getElementById("results").value + "\n" + vv;
+	document.getElementById("results").value = beforeVal;
+}
+
+function calLotteIn(){
+
+	var num = document.getElementById("numbers");
+	if(num.value === ''){
+		num.value = test;
+	}
+		
+	const dataArr = num.value.replaceAll('\n', '').split(',');
+	
+	const fil = [];
+	dataArr.forEach((element) => {
+		if(!fil.includes(element)) {
+			fil.push(element);
+		}
+	});
+
+	fil.sort(function(a, b)  {
+	  return a - b;
+	});
+
+	const last = fil;
+
+	const hi = [];
+	const vv = [];
+	for(; vv.length < 5;){
+		var t1 = last[Math.floor(Math.random() * last.length)];
+		hi.push(t1);
+		hi.forEach((element) => {	
+			if(!vv.includes(element)) {		
+				vv.push(element);
+			}
+	});
+	}
+
+	vv.sort(function(a, b)  {
+	  return a - b;
+	});
+	console.log(vv);
+	
+	var beforeVal = document.getElementById("results").value + "\n" + vv;
+	document.getElementById("results").value = beforeVal;
+}
+
+</script>
+</head>
+<body>
+	<div style="margin : 10px;">
+		<textarea id="numbers" name="numbers" rows="10" cols="50"></textarea>
+	</div>
+	<div style="margin : 10px;" >	
+		<input type='button' value='비우기' style="margin : 10px;" onclick="javascript:clearView();"/>
+		<input type='button' value='비포함 찾기' style="margin : 10px;" onclick="javascript:calLotteOut();"/>
+		<input type='button' value='포함 찾기' style="margin : 10px;" onclick="javascript:calLotteIn();"/>
+	</div>
+	
+	<div style="margin : 10px;">
+		<textarea id="results" name="results" rows="10" cols="50" readonly=true></textarea>
+	</div>
+</body>
+</html>
